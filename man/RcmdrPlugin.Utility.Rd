@@ -2,12 +2,24 @@
 % Please edit documentation in R/RcmdrPlugin.cpd.r
 \name{RcmdrPlugin.Utility}
 \alias{RcmdrPlugin.Utility}
+\alias{cbpPlot}
+\alias{ctpPlot}
+\alias{cbpMass}
+\alias{ctpMass}
 \alias{cbpProbabilities}
 \alias{ctpProbabilities}
 \alias{cbpQuantiles}
 \alias{ctpQuantiles}
 \title{cpd Plug-In Utility Functions}
 \usage{
+cbpPlot()
+
+ctpPlot()
+
+cbpMass()
+
+ctpMass()
+
 cbpProbabilities()
 
 ctpProbabilities()
