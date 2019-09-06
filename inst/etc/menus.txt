@@ -9,7 +9,7 @@
     item    cbpMenu         command          "Complex Pearson biparametric tail probabilities..."           cbpProbabilities    ""          ""
     item    cbpMenu         command          "Complex Pearson biparametric probabilities..."                cbpMass             ""          ""
     item    cbpMenu         command          "Plot Complex Pearson biparametric distribution..."            cbpPlot ""          "packageAvailable('RcmdrMisc')"
-#    item    cbpMenu         command          "Sample from Complex Pearson biparametric distribution..."     cbpDistributionSamples ""      ""
+    item    cbpMenu         command          "Sample from Complex Pearson biparametric distribution..."     cbpSamples ""      ""
 # Complex Pearson triparametric distribution
     menu    ctpMenu discreteMenu    ""  ""  ""  ""
     item    discreteMenu    cascade          "Complex Pearson triparametric distribution"                   ctpMenu             ""          ""
@@ -17,4 +17,4 @@
     item    ctpMenu         command          "Complex Pearson triparametric tail probabilities..."          ctpProbabilities    ""          ""
     item    ctpMenu         command          "Complex Pearson triparametric probabilities..."               ctpMass             ""          ""
     item    ctpMenu         command          "Plot Complex Pearson triparametric distribution..."           ctpPlot ""          "packageAvailable('RcmdrMisc')"
-#    item    ctpMenu         command          "Sample from Complex Pearson triparametric distribution..."    ctpDistributionSamples ""      ""
+    item    ctpMenu         command          "Sample from Complex Pearson triparametric distribution..."    ctpSamples ""      ""

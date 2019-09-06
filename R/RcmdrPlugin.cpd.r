@@ -32,6 +32,236 @@ NULL
 #' @importFrom cpd pcbp
 #' @export
 
+cbpSamples<-function (){
+   initial <- getDialog("cbpSamples",
+                        defaults = list(
+                           initialValues=c(1,4),
+                           sName = "cbpSamples",
+                           nObse = 100,
+                           nSamp = 1,
+                           sMean = "1",
+                           sSum = "0",
+                           sSd="0"))
+   initializeDialog(title = "CBP Distribution")
+   frame <- tkframe(top)
+   sNVar     <-tclVar(initial$sName)
+   sNEnt     <- ttkentry(frame, width = "30",textvariable = sNVar)
+   bVar     <-tclVar(initial$initialValues[1])
+   bEnt     <- ttkentry(frame, width = "6",textvariable = bVar)
+   gammaVar <-tclVar(initial$initialValues[2])
+   gammaEnt <- ttkentry(frame, width = "6",textvariable = gammaVar)
+   nSVar <-tclVar(initial$nSamp)
+   nSEnt <- ttkentry(frame, width = "6",textvariable = nSVar)
+   nOVar <-tclVar(initial$nObse)
+   nOEnt <- ttkentry(frame, width = "6",textvariable = nOVar)
+   checkBoxes(frame = "checksFrame", boxes = c("mean", 
+             "sum", "sd"), initialValues = c(initial$sMean, 
+            initial$sSum, initial$sSd), labels = gettextRcmdr(c("Sample means", 
+            "Sample sums", "Sample standard deviations")))
+   
+   tkgrid(labelRcmdr(frame, text = "Sample name"), sNEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "b"), bEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "gamma"), gammaEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of Obs."), nOEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of Samples"), nSEnt, sticky = "w", padx = 6)
+   tkgrid(frame, sticky = "w")
+   tkgrid(checksFrame, sticky = "w")
+   tkgrid.configure(sNEnt, sticky = "w")
+   tkgrid.configure(bEnt, sticky = "w")
+   tkgrid.configure(gammaEnt, sticky = "w")
+   tkgrid.configure(nOEnt, sticky = "w")
+   tkgrid.configure(nSEnt, sticky = "w")
+   
+   onOK <- function(){
+      closeDialog()
+      warn  <- options(warn = -1)
+      b     <- as.numeric(tclvalue(bVar))
+      gamma <- as.numeric(tclvalue(gammaVar))
+      sN    <- gsub(" ","", tclvalue(sNVar))
+      nO    <- as.numeric(tclvalue(nOVar))
+      nS    <- as.numeric(tclvalue(nSVar))
+      options(warn)
+      #validattions
+      if (is.na(b)){
+         errorCondition(recall = cbpSamples, message ="b not specified" )
+         return()
+      }
+      if (is.na(gamma)){
+         errorCondition(recall = cbpSamples, message ="gamma not specified" )
+         return()
+      }
+      if (gamma<=0){
+         errorCondition(recall = cbpSamples, message ="gamma not positive" )
+         return()
+      }
+      if (sN==""){
+         errorCondition(recall = cbpSamples, message = "no sample name")
+         return()
+      }
+      if (trunc(nO)!=nO || nO < 1){
+         errorCondition(recall = cbpSamples, message = "observations not interger greater than 0")
+         return()
+      }
+      if (trunc(nS)!=nS || nS < 1){
+         errorCondition(recall = cbpSamples, message = "samples not interger greater than 0")
+         return()
+      }
+      
+      ins <- paste(sN,"<-as.data.frame(matrix(rcbp(",nO*nS,",",b,",",gamma,"), ncol=",nO,"))\n",sep="")
+      ins <- paste(ins,"rownames(",sN,") <- paste('sample', 1:", nS,", sep='') \n",sep="")
+      ins <- paste(ins,"colnames(",sN,") <- paste('obs', 1:",nO,", sep='') \n",sep="")
+      doItAndPrint(ins)
+      additional <- ""
+      if (tclvalue(meanVariable) == "1") {
+         additional <- paste(additional,"mean <- rowMeans(",sN,"[,1:",nO,"])\n",sep="")
+      }
+      if (tclvalue(sumVariable) == "1") {
+         additional <- paste(additional,"sum <- rowSums(",sN,"[,1:",nO,"])\n",sep="")
+      }
+      if (tclvalue(sdVariable) == "1") {
+         additional <- paste(additional,"sd <- apply(",sN,"[,1:",nO,"],1,sd)\n",sep="")
+      }
+      if (additional!=""){
+         doItAndPrint(paste(sN," <- within(",sN,", {\n",additional,"})",sep=""))
+      }
+      activeDataSet(sN)
+      putDialog("cbpSamples", list(initialValues = c( tclvalue(bVar), tclvalue(gammaVar)), 
+                                 sName = tclvalue(sNVar), nObse = tclvalue(nOVar),
+                                 nSamp = tclvalue(nSVar), sMean = tclvalue(meanVariable),
+                                 sSum = tclvalue(sumVariable), sSd=tclvalue(sdVariable)  ) , resettable = FALSE)
+      tkfocus(CommanderWindow())
+   }
+   OKCancelHelp(helpSubject = "rcbp", reset = "cbpSamples", apply = "cbpSamples")
+   tkgrid(buttonsFrame, sticky = "ew")
+   dialogSuffix(focus = sNEnt) 
+}
+
+
+#' @rdname RcmdrPlugin.Utility
+#' @importFrom Rcmdr ActiveModel getRcmdr .Tcl errorCondition
+#' @importFrom cpd pcbp
+#' @export
+
+ctpSamples<-function (){
+   initial <- getDialog("ctpSamples",
+                        defaults = list(
+                           initialValues=c(0.5,1,3.5),
+                           sName = "ctpSamples",
+                           nObse = 100,
+                           nSamp = 1,
+                           sMean = "1",
+                           sSum = "0",
+                           sSd="0"))
+   initializeDialog(title = "CTP Distribution")
+   frame <- tkframe(top)
+   sNVar     <-tclVar(initial$sName)
+   sNEnt     <- ttkentry(frame, width = "30",textvariable = sNVar)
+   aVar     <-tclVar(initial$initialValues[1])
+   aEnt     <- ttkentry(frame, width = "6",textvariable = aVar)
+   bVar     <-tclVar(initial$initialValues[2])
+   bEnt     <- ttkentry(frame, width = "6",textvariable = bVar)
+   gammaVar <-tclVar(initial$initialValues[3])
+   gammaEnt <- ttkentry(frame, width = "6",textvariable = gammaVar)
+   nSVar <-tclVar(initial$nSamp)
+   nSEnt <- ttkentry(frame, width = "6",textvariable = nSVar)
+   nOVar <-tclVar(initial$nObse)
+   nOEnt <- ttkentry(frame, width = "6",textvariable = nOVar)
+   checkBoxes(frame = "checksFrame", boxes = c("mean", 
+                                               "sum", "sd"), initialValues = c(initial$sMean, 
+                                                                               initial$sSum, initial$sSd), labels = gettextRcmdr(c("Sample means", 
+                                                                                                                                   "Sample sums", "Sample standard deviations")))
+   
+   tkgrid(labelRcmdr(frame, text = "Sample name"), sNEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "a"), aEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "b"), bEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "gamma"), gammaEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of Obs."), nOEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of Samples"), nSEnt, sticky = "w", padx = 6)
+   tkgrid(frame, sticky = "w")
+   tkgrid(checksFrame, sticky = "w")
+   tkgrid.configure(sNEnt, sticky = "w")
+   tkgrid.configure(aEnt, sticky = "w")
+   tkgrid.configure(bEnt, sticky = "w")
+   tkgrid.configure(gammaEnt, sticky = "w")
+   tkgrid.configure(nOEnt, sticky = "w")
+   tkgrid.configure(nSEnt, sticky = "w")
+   
+   onOK <- function(){
+      closeDialog()
+      warn  <- options(warn = -1)
+      a     <- as.numeric(tclvalue(aVar))
+      b     <- as.numeric(tclvalue(bVar))
+      gamma <- as.numeric(tclvalue(gammaVar))
+      sN    <- gsub(" ","", tclvalue(sNVar))
+      nO    <- as.numeric(tclvalue(nOVar))
+      nS    <- as.numeric(tclvalue(nSVar))
+      options(warn)
+      #validattions
+      if (is.na(a)){
+         errorCondition(recall = ctpSamples, message ="a not specified" )
+         return()
+      }
+      if (is.na(b)){
+         errorCondition(recall = ctpSamples, message ="b not specified" )
+         return()
+      }
+      if (is.na(gamma)){
+         errorCondition(recall = ctpSamples, message ="gamma not specified" )
+         return()
+      }
+      if (gamma<=2*a){
+         errorCondition(recall = ctpSamples, message ="gamma less than 2a" )
+         return()
+      }
+      if (sN==""){
+         errorCondition(recall = ctpSamples, message = "no sample name")
+         return()
+      }
+      if (trunc(nO)!=nO || nO < 1){
+         errorCondition(recall = ctpSamples, message = "observations not interger greater than 0")
+         return()
+      }
+      if (trunc(nS)!=nS || nS < 1){
+         errorCondition(recall = ctpSamples, message = "samples not interger greater than 0")
+         return()
+      }
+      
+      ins <- paste(sN,"<-as.data.frame(matrix(rctp(",nO*nS,",",a,",",b,",",gamma,"), ncol=",nO,"))\n",sep="")
+      ins <- paste(ins,"rownames(",sN,") <- paste('sample', 1:", nS,", sep='') \n",sep="")
+      ins <- paste(ins,"colnames(",sN,") <- paste('obs', 1:",nO,", sep='') \n",sep="")
+      doItAndPrint(ins)
+      additional <- ""
+      if (tclvalue(meanVariable) == "1") {
+         additional <- paste(additional,"mean <- rowMeans(",sN,"[,1:",nO,"])\n",sep="")
+      }
+      if (tclvalue(sumVariable) == "1") {
+         additional <- paste(additional,"sum <- rowSums(",sN,"[,1:",nO,"])\n",sep="")
+      }
+      if (tclvalue(sdVariable) == "1") {
+         additional <- paste(additional,"sd <- apply(",sN,"[,1:",nO,"],1,sd)\n",sep="")
+      }
+      if (additional!=""){
+         doItAndPrint(paste(sN," <- within(",sN,", {\n",additional,"})",sep=""))
+      }
+      
+      activeDataSet(sN)
+      putDialog("ctpSamples", list(initialValues = c( tclvalue(aVar), tclvalue(bVar), tclvalue(gammaVar)), 
+                                   sName = tclvalue(sNVar), nObse = tclvalue(nOVar),
+                                   nSamp = tclvalue(nSVar), sMean = tclvalue(meanVariable),
+                                   sSum = tclvalue(sumVariable), sSd=tclvalue(sdVariable)) , resettable = FALSE)
+      tkfocus(CommanderWindow())
+   }
+   OKCancelHelp(helpSubject = "rctp", reset = "ctpSamples", apply = "ctpSamples")
+   tkgrid(buttonsFrame, sticky = "ew")
+   dialogSuffix(focus = sNEnt) 
+}
+
+
+#' @rdname RcmdrPlugin.Utility
+#' @importFrom Rcmdr ActiveModel getRcmdr .Tcl errorCondition
+#' @importFrom cpd pcbp
+#' @export
+
 cbpPlot<-function (){
    initial <- getDialog("cbpPlot",
                         defaults = list(

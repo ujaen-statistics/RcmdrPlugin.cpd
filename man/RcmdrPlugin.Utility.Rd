@@ -2,6 +2,8 @@
 % Please edit documentation in R/RcmdrPlugin.cpd.r
 \name{RcmdrPlugin.Utility}
 \alias{RcmdrPlugin.Utility}
+\alias{cbpSamples}
+\alias{ctpSamples}
 \alias{cbpPlot}
 \alias{ctpPlot}
 \alias{cbpMass}
@@ -12,6 +14,10 @@
 \alias{ctpQuantiles}
 \title{cpd Plug-In Utility Functions}
 \usage{
+cbpSamples()
+
+ctpSamples()
+
 cbpPlot()
 
 ctpPlot()
