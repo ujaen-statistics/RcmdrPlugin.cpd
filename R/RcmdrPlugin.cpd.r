@@ -42,7 +42,7 @@ cbpSamples<-function (){
                            sMean = "1",
                            sSum = "0",
                            sSd="0"))
-   initializeDialog(title = "CBP Distribution")
+   initializeDialog(title = "Sample from CBP Distribution")
    frame <- tkframe(top)
    sNVar     <-tclVar(initial$sName)
    sNEnt     <- ttkentry(frame, width = "30",textvariable = sNVar)
@@ -59,11 +59,14 @@ cbpSamples<-function (){
             initial$sSum, initial$sSd), labels = gettextRcmdr(c("Sample means", 
             "Sample sums", "Sample standard deviations")))
    
-   tkgrid(labelRcmdr(frame, text = "Sample name"), sNEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Enter name for data set"), sNEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "", fg=getRcmdr("title.color"), font="RcmdrTitleFont"), sticky="w",padx = 6)
    tkgrid(labelRcmdr(frame, text = "b"), bEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "gamma"), gammaEnt, sticky = "w", padx = 6)
-   tkgrid(labelRcmdr(frame, text = "Number of Obs."), nOEnt, sticky = "w", padx = 6)
-   tkgrid(labelRcmdr(frame, text = "Number of Samples"), nSEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of samples"), nSEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of observations"), nOEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "", fg=getRcmdr("title.color"), font="RcmdrTitleFont"), sticky="w",padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Add to Data Set:", fg=getRcmdr("title.color"), font="RcmdrTitleFont"), sticky="w",padx = 6)
    tkgrid(frame, sticky = "w")
    tkgrid(checksFrame, sticky = "w")
    tkgrid.configure(sNEnt, sticky = "w")
@@ -152,7 +155,7 @@ ctpSamples<-function (){
                            sMean = "1",
                            sSum = "0",
                            sSd="0"))
-   initializeDialog(title = "CTP Distribution")
+   initializeDialog(title = "Sample for CTP Distribution")
    frame <- tkframe(top)
    sNVar     <-tclVar(initial$sName)
    sNEnt     <- ttkentry(frame, width = "30",textvariable = sNVar)
@@ -166,17 +169,21 @@ ctpSamples<-function (){
    nSEnt <- ttkentry(frame, width = "6",textvariable = nSVar)
    nOVar <-tclVar(initial$nObse)
    nOEnt <- ttkentry(frame, width = "6",textvariable = nOVar)
+   
    checkBoxes(frame = "checksFrame", boxes = c("mean", 
                                                "sum", "sd"), initialValues = c(initial$sMean, 
                                                                                initial$sSum, initial$sSd), labels = gettextRcmdr(c("Sample means", 
                                                                                                                                    "Sample sums", "Sample standard deviations")))
    
-   tkgrid(labelRcmdr(frame, text = "Sample name"), sNEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Enter name for data set:"), sNEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "", fg=getRcmdr("title.color"), font="RcmdrTitleFont"), sticky="w",padx = 6)
    tkgrid(labelRcmdr(frame, text = "a"), aEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "b"), bEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "gamma"), gammaEnt, sticky = "w", padx = 6)
-   tkgrid(labelRcmdr(frame, text = "Number of Obs."), nOEnt, sticky = "w", padx = 6)
-   tkgrid(labelRcmdr(frame, text = "Number of Samples"), nSEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of samples"), nSEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Number of observations"), nOEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "", fg=getRcmdr("title.color"), font="RcmdrTitleFont"), sticky="w",padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Add to Data Set:", fg=getRcmdr("title.color"), font="RcmdrTitleFont"), sticky="w",padx = 6)
    tkgrid(frame, sticky = "w")
    tkgrid(checksFrame, sticky = "w")
    tkgrid.configure(sNEnt, sticky = "w")
@@ -280,8 +287,8 @@ cbpPlot<-function (){
    
    tkgrid(labelRcmdr(frame, text = "b"), bEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "gamma"), gammaEnt, sticky = "w", padx = 6)
-   tkgrid(massBut, labelRcmdr(buttonFrame, text = "Probability mass"), sticky = "w")
-   tkgrid(distBut, labelRcmdr(buttonFrame, text = "Distribution function"), sticky = "w")
+   tkgrid(massBut, labelRcmdr(buttonFrame, text = "Plot probability mass function"), sticky = "w")
+   tkgrid(distBut, labelRcmdr(buttonFrame, text = "Plot distribution function"), sticky = "w")
    tkgrid(frame, sticky = "w")
    tkgrid(buttonFrame, sticky = "w")
    tkgrid.configure(bEnt, sticky = "w")
@@ -314,7 +321,7 @@ cbpPlot<-function (){
       if (typePlot=="mass"){
          ins=paste("local({x <- ",firstValue,":",lastValue, "\n", sep = "")
          ins=paste(ins, "plotDistr(x,dcbp(x, ",b,", ",gamma, "), xlab='x', \n", sep = "")
-         ins=paste(ins, "ylab='Probability Mass', main='CBP distribution b=",b," gamma=",gamma,"',\n", sep = "")
+         ins=paste(ins, "ylab='Probability mass function', main='CBP distribution b=",b," gamma=",gamma,"',\n", sep = "")
          ins=paste(ins, "discrete=TRUE)})",sep="")
       }else{
          ins=paste("local({x <- ",firstValue,":",lastValue, "\n", sep = "")
@@ -359,8 +366,8 @@ ctpPlot<-function (){
    tkgrid(labelRcmdr(frame, text = "a"), aEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "b"), bEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "gamma"), gammaEnt, sticky = "w", padx = 6)
-   tkgrid(massBut, labelRcmdr(buttonFrame, text = "Probability mass"), sticky = "w")
-   tkgrid(distBut, labelRcmdr(buttonFrame, text = "Distribution function"), sticky = "w")
+   tkgrid(massBut, labelRcmdr(buttonFrame, text = "Plot probability mass function"), sticky = "w")
+   tkgrid(distBut, labelRcmdr(buttonFrame, text = "Plot distribution function"), sticky = "w")
    tkgrid(frame, sticky = "w")
    tkgrid(buttonFrame, sticky = "w")
    tkgrid.configure(aEnt, sticky = "w")
@@ -403,7 +410,7 @@ ctpPlot<-function (){
       if (typePlot=="mass"){
          ins=paste("local({x <- ",firstValue,":",lastValue, "\n", sep = "")
          ins=paste(ins, "plotDistr(x,dctp(x, ",a,", ",b,", ",gamma, "), xlab='x', \n", sep = "")
-         ins=paste(ins, "ylab='Probability Mass', main='CTP distribution a=",a," b=",b," gamma=",gamma,"',\n", sep = "")
+         ins=paste(ins, "ylab='Probability mass function', main='CTP distribution a=",a," b=",b," gamma=",gamma,"',\n", sep = "")
          ins=paste(ins, "discrete=TRUE)})",sep="")
       }else{
          ins=paste("local({x <- ",firstValue,":",lastValue, "\n", sep = "")
@@ -433,7 +440,7 @@ cbpMass<-function (){
                         defaults = list(
                            initialValues=c(1,4),
                            error = 1e-4))
-   initializeDialog(title = "CBP Mass")
+   initializeDialog(title = "CBP Probabilities")
    frame <- tkframe(top)
    bVar     <-tclVar(initial$initialValues[1])
    bEnt     <- ttkentry(frame, width = "6",textvariable = bVar)
@@ -503,7 +510,7 @@ ctpMass<-function (){
                         defaults = list(
                            initialValues=c(0.5,1,3.5),
                            error = 1e-4))
-   initializeDialog(title = "CTP Mass")
+   initializeDialog(title = "CTP Probabilities")
    frame <- tkframe(top)
    aVar     <-tclVar(initial$initialValues[1])
    aEnt     <- ttkentry(frame, width = "6",textvariable = aVar)
@@ -590,7 +597,7 @@ cbpProbabilities<-function (){
                            initialValues=c(1,4),
                            tail = "lower",
                            values = ""))
-   initializeDialog(title = "CBP Probabilities")
+   initializeDialog(title = "CBP Cumulative Probabilities")
    frame <- tkframe(top)
    vVar     <- tclVar(initial$values)
    vEnt     <- ttkentry(frame, width = "30",textvariable = vVar)
@@ -662,7 +669,7 @@ ctpProbabilities<-function (){
                            initialValues=c(0.5,1,3.5),
                            tail = "lower",
                            values = ""))
-   initializeDialog(title = "CTP Probabilities")
+   initializeDialog(title = "CTP Cumulative Probabilities")
    frame <- tkframe(top)
    vVar     <- tclVar(initial$values)
    vEnt     <- ttkentry(frame, width = "30",textvariable = vVar)
@@ -677,7 +684,7 @@ ctpProbabilities<-function (){
    lowerBut <- ttkradiobutton(buttonFrame, variable = tailVar, value = "lower")
    upperrBut <- ttkradiobutton(buttonFrame, variable = tailVar, value = "upper")
 
-   tkgrid(labelRcmdr(frame, text = "Probabilities"), vEnt, sticky = "w", padx = 6)
+   tkgrid(labelRcmdr(frame, text = "Variable value(s)"), vEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "a"), aEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "b"), bEnt, sticky = "w", padx = 6)
    tkgrid(labelRcmdr(frame, text = "gamma"), gammaEnt, sticky = "w", padx = 6)
