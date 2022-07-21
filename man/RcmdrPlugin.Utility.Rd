@@ -4,35 +4,50 @@
 \alias{RcmdrPlugin.Utility}
 \alias{cbpSamples}
 \alias{ctpSamples}
+\alias{ebwSamples}
 \alias{cbpPlot}
 \alias{ctpPlot}
+\alias{ebwPlot}
 \alias{cbpMass}
 \alias{ctpMass}
+\alias{ebwMass}
 \alias{cbpProbabilities}
 \alias{ctpProbabilities}
+\alias{ebwProbabilities}
 \alias{cbpQuantiles}
 \alias{ctpQuantiles}
+\alias{ebwQuantiles}
 \title{cpd Plug-In Utility Functions}
 \usage{
 cbpSamples()
 
 ctpSamples()
 
+ebwSamples()
+
 cbpPlot()
 
 ctpPlot()
+
+ebwPlot()
 
 cbpMass()
 
 ctpMass()
 
+ebwMass()
+
 cbpProbabilities()
 
 ctpProbabilities()
 
+ebwProbabilities()
+
 cbpQuantiles()
 
 ctpQuantiles()
+
+ebwQuantiles()
 }
 \description{
 cpd Plug-In Utility Functions

@@ -3,7 +3,6 @@
 \docType{package}
 \name{RcmdrPlugin.cpd}
 \alias{RcmdrPlugin.cpd}
-\alias{RcmdrPlugin.cpd-package}
 \title{cpd Plug-In for R Commander}
 \description{
 This package is an R Commander "plug-in" based on the
