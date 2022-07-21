@@ -18,3 +18,11 @@
     item    ctpMenu         command          "Complex Pearson triparametric probabilities..."               ctpMass             ""          ""
     item    ctpMenu         command          "Plot Complex Pearson triparametric distribution..."           ctpPlot ""          "packageAvailable('RcmdrMisc')"
     item    ctpMenu         command          "Sample from Complex Pearson triparametric distribution..."    ctpSamples ""      ""
+# EBW distribution
+    menu    ebwMenu discreteMenu    ""  ""  ""  ""
+    item    discreteMenu    cascade          "Extended biparametric Waring distribution"                    ebwMenu             ""          ""
+    item    ebwMenu 	      command          "Extended biparametric Waring  quantiles..."                   ebwQuantiles        ""          ""
+    item    ebwMenu         command          "Extended biparametric Waring  tail probabilities..."          ebwProbabilities    ""          ""
+    item    ebwMenu         command          "Extended biparametric Waring  probabilities..."               ebwMass             ""          ""
+    item    ebwMenu         command          "Plot Extended biparametric Waring  distribution..."           ebwPlot             ""          "packageAvailable('RcmdrMisc')"
+    item    ebwMenu         command          "Sample from Extended biparametric Waring distribution..."     ebwSamples          ""          ""
