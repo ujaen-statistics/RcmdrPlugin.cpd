@@ -260,12 +260,12 @@ ctpSamples<-function (){
 }
 
 #' @rdname RcmdrPlugin.Utility
-#' @importFrom Rcmdr ActiveModel getRcmdr .Tcl errorCondition checkBoxes activeDataSet
+#' @importFrom Rcmdr ActiveModel getRcmdr .Tcl errorCondition checkBoxes activeDataSet radioButtons tkconfigure
 #' @importFrom cpd pebw
 #' @export
 
 ebwSamples<-function (){
-  checksFrame <- meanVariable <- sumVariable <- sdVariable <- NULL
+  checksFrame <- meanVariable <- sumVariable <- sdVariable <- typeEBWFrame <- typeEBWVariable <-NULL
   initial <- getDialog("ebwSamples",
                        defaults = list(
                          initialValues=c(0.5,1,3.5),
@@ -588,6 +588,7 @@ ctpPlot<-function (){
 #' @export
 
 ebwPlot<-function (){
+  typeEBWFrame <- typeEBWVariable <-NULL
   initial <- getDialog("ebwPlot",
                        defaults = list(
                          initialValues=c(0.5,1,3.5),
@@ -871,6 +872,7 @@ ctpMass<-function (){
 #' @export
 
 ebwMass<-function (){
+  typeEBWFrame <- typeEBWVariable <-NULL
   initial <- getDialog("ebwMass",
                        defaults = list(
                          initialValues=c(0.5,1,3.5),
@@ -1144,6 +1146,7 @@ ctpProbabilities<-function (){
 #' @export
 
 ebwProbabilities<-function (){
+  typeEBWFrame <- typeEBWVariable <-NULL
   initial <- getDialog("ebwProbabilities",
                        defaults = list(
                          initialValues=c(0.5,1,3.5),
@@ -1414,6 +1417,7 @@ ctpQuantiles<-function (){
 #' @export
 
 ebwQuantiles<-function (){
+  typeEBWFrame <- typeEBWVariable <-NULL
   initial <- getDialog("ebwQuantiles",
                        defaults = list(
                          initialValues=c(0.5,1,3.5),

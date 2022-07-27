@@ -8,7 +8,7 @@ Authors@R: c(
     person("Maria Jose", "Olmo-Jimenez", role = "aut", email = "mjolmo@ujaen.es"))
 Maintainer: Silverio Vilchez-Lopez <silverio.vilchez@gmail.com>
 Depends:
-    R (>= 4.2.1),
+    R (>= 4.2.0),
     cpd (>= 0.2.0),
     RcmdrMisc (>= 2.7-2)
 Imports:
@@ -22,4 +22,4 @@ Author: Silverio Vilchez-Lopez [aut, cre],
     Maria Jose Olmo-Jimenez [aut]
 Repository: CRAN
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
