@@ -6,12 +6,7 @@
 \title{cpd Plug-In for R Commander}
 \description{
 This package is an R Commander "plug-in" based on the
-\code{cpd} package (see \code{\link{cpd}}). It provides a GUI for fitting a generalized Waring regression model to a
-dataset, together with other common regression functions such as Akaike and
-Bayesian information criteria, stepwise model selection or add observation
-statistics to data. Moreover, it allows for computing the partition of the
-variance for the selected \code{GW} model and carrying out a graphical diagnosis
-by a simulated envelope of the residuals.
+\code{cpd} package (see \code{\link{cpd}}). It provides a GUI for ...
 }
 \details{
 Package: RcmdrPlugin.cpd
@@ -22,9 +17,9 @@ Title: R Commander Plug-In for Complex Pearson distributions
 
 Version: 0.0.1
 
-Date: 2019-09-01
+Date: 2022-08-16
 
-Depends: R (>= 3.0.0), cpd (>= 0.1.0), RcmdrMisc (>= 1.0-2)
+Depends: R (>= 4.2.0), cpd (>= 0.3.0), RcmdrMisc (>= 2.7-2)
 
 License: GPL (>= 2)
 }
