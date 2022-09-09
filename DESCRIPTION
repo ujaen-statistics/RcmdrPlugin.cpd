@@ -1,6 +1,6 @@
 Package: RcmdrPlugin.cpd
 Type: Package
-Title: R Commander Plug-in for Complex Pearson distributions
+Title: R Commander Plug-in for Complex Pearson Distributions
 Version: 0.2.0
 Date: 2022-08-08
 Authors@R: c(
