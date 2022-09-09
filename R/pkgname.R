@@ -1,4 +1,4 @@
-#' cpd Plug-In for R Commander that adds the complex Pearson distributions to the 'Rcmdr' package.
+#' cpd Plug-In for R Commander that adds the complex Pearson Distributions to the 'Rcmdr' package.
 #'
 #' @description This package is an R Commander "plug-in" based on the
 #' \code{cpd} package (see \code{\link{cpd}}). It adds new discrete distributions belonging to the complex
