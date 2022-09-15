@@ -3,10 +3,10 @@
 \docType{package}
 \name{RcmdrPlugin.cpd}
 \alias{RcmdrPlugin.cpd}
-\title{cpd Plug-In for R Commander that adds the complex Pearson Distributions to the 'Rcmdr' package.}
+\title{'cpd' Plug-In for R Commander that adds the complex Pearson Distributions to the 'Rcmdr' package.}
 \description{
 This package is an R Commander "plug-in" based on the
-\code{cpd} package (see \code{\link{cpd}}). It adds new discrete distributions belonging to the complex
+'\code{cpd}' package (see \code{\link{cpd}}). It adds new discrete distributions belonging to the complex
 Pearson family to the 'Discrete distributions' submenu. Specifically, it allows for obtaining probabilities, 
 quantiles, random numbers and graphs of the complex biparametric or triparametric Pearson and extended biparametric
 Waring distributions.
@@ -20,7 +20,7 @@ Title: R Commander Plug-In for Complex Pearson Distributions
 
 Version: 0.2.0
 
-Date: 2022-08-16
+Date: 2022-09-15
 
 Depends: R (>= 4.2.0), cpd (>= 0.3.0), RcmdrMisc (>= 2.7-2)
 

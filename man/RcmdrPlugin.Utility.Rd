@@ -17,7 +17,7 @@
 \alias{cbpQuantiles}
 \alias{ctpQuantiles}
 \alias{ebwQuantiles}
-\title{cpd Plug-In Utility Functions}
+\title{'cpd' Plug-In Utility Functions}
 \usage{
 cbpSamples()
 
@@ -49,6 +49,9 @@ ctpQuantiles()
 
 ebwQuantiles()
 }
+\value{
+Not return value, the effects are shown in 'Rcmdr'  GUI
+}
 \description{
-cpd Plug-In Utility Functions
+'cpd' Plug-In Utility Functions
 }

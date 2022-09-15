@@ -2,7 +2,7 @@ Package: RcmdrPlugin.cpd
 Type: Package
 Title: R Commander Plug-in for Complex Pearson Distributions
 Version: 0.2.0
-Date: 2022-08-08
+Date: 2022-09-10
 Authors@R: c(
     person("Silverio", "Vilchez-Lopez", role = c("aut", "cre"), email = "svilchez@ujaen.es"),
     person("Maria Jose", "Olmo-Jimenez", role = "aut", email = "mjolmo@ujaen.es"))
@@ -13,11 +13,11 @@ Depends:
     RcmdrMisc (>= 2.7-2)
 Imports:
     Rcmdr (>= 2.7-0)
-Description: Provides an Rcmdr "plug-in" based on the cpd package.
+Description: Provides an 'Rcmdr' plug-in based on the 'cpd' package.
 License: GPL (>= 2)
 LazyData: true
 NeedsCompilation: no
-Packaged: 2022-08-08 10:24:00
+Packaged: 2022-09-15 22:27:00
 Author: Silverio Vilchez-Lopez [aut, cre],
     Maria Jose Olmo-Jimenez [aut]
 Repository: CRAN

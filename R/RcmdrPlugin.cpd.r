@@ -1,4 +1,4 @@
-#' cpd Plug-In Utility Functions
+#' 'cpd' Plug-In Utility Functions
 #'
 #' @name RcmdrPlugin.Utility
 NULL
@@ -31,7 +31,7 @@ NULL
 #' @rdname RcmdrPlugin.Utility
 #' @importFrom Rcmdr ActiveModel getRcmdr .Tcl errorCondition checkBoxes activeDataSet
 #' @importFrom cpd pcbp
-#' @export
+#' @return Not return value, the effects are shown in 'Rcmdr'  GUI
 
 cbpSamples<-function (){
    checksFrame <- meanVariable <- sumVariable <- sdVariable <- NULL
@@ -76,13 +76,13 @@ cbpSamples<-function (){
    
    onOK <- function(){
       closeDialog()
-      warn  <- options(warn = -1)
+      
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       sN    <- gsub(" ","", tclvalue(sNVar))
       nO    <- as.numeric(tclvalue(nOVar))
       nS    <- as.numeric(tclvalue(nSVar))
-      options(warn)
+      
       #validattions
       if (is.na(b)){
          errorCondition(recall = cbpSamples, message ="b not specified" )
@@ -191,14 +191,14 @@ ctpSamples<-function (){
    
    onOK <- function(){
       closeDialog()
-      warn  <- options(warn = -1)
+      
       a     <- as.numeric(tclvalue(aVar))
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       sN    <- gsub(" ","", tclvalue(sNVar))
       nO    <- as.numeric(tclvalue(nOVar))
       nS    <- as.numeric(tclvalue(nSVar))
-      options(warn)
+      
       #validattions
       if (is.na(a)){
          errorCondition(recall = ctpSamples, message ="a not specified" )
@@ -329,14 +329,14 @@ ebwSamples<-function (){
   
   onOK <- function(){
     closeDialog()
-    warn  <- options(warn = -1)
+    
     alpha     <- as.numeric(tclvalue(alphaVar))
     rho     <- as.numeric(tclvalue(rhoVar))
     gamma <- as.numeric(tclvalue(gammaVar))
     sN    <- gsub(" ","", tclvalue(sNVar))
     nO    <- as.numeric(tclvalue(nOVar))
     nS    <- as.numeric(tclvalue(nSVar))
-    options(warn)
+    
     #validattions
     if (is.na(alpha)){
       errorCondition(recall = ebwSamples, message ="alpha not specified" )
@@ -443,11 +443,11 @@ cbpPlot<-function (){
    
    onOK <- function(){
       closeDialog()
-      warn  <- options(warn = -1)
+      
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       typePlot<- tclvalue(typeVar)
-      options(warn)
+      
       #validattions
       if (is.na(b)){
          errorCondition(recall = cbpPlot, message ="b not specified" )
@@ -528,12 +528,12 @@ ctpPlot<-function (){
    
    onOK <- function(){
       closeDialog()
-      warn  <- options(warn = -1)
+      
       a     <- as.numeric(tclvalue(aVar))
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       typePlot<- tclvalue(typeVar)
-      options(warn)
+      
       #validattions
       if (is.na(a)){
          errorCondition(recall = ctpPlot, message ="a not specified" )
@@ -639,12 +639,12 @@ ebwPlot<-function (){
 
   onOK <- function(){
     closeDialog()
-    warn  <- options(warn = -1)
+    
     alpha     <- as.numeric(tclvalue(alphaVar))
     rho     <- as.numeric(tclvalue(rhoVar))
     gamma <- as.numeric(tclvalue(gammaVar))
     typePlot<- tclvalue(typeVar)
-    options(warn)
+    
     #validattions
     if (is.na(alpha)){
       errorCondition(recall = ebwPlot, message ="alpha not specified" )
@@ -741,11 +741,11 @@ cbpMass<-function (){
    
    onOK <- function(){
       closeDialog()
-      warn  <- options(warn = -1)
+      
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       er     <- as.numeric(tclvalue(eVar))
-      options(warn)
+      
       #validattions
       if (is.na(b)){
          errorCondition(recall = cbpMass, message ="b not specified" )
@@ -815,12 +815,12 @@ ctpMass<-function (){
    
    onOK <- function(){
       closeDialog()
-      warn  <- options(warn = -1)
+      
       a     <- as.numeric(tclvalue(aVar))
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       er     <- as.numeric(tclvalue(eVar))
-      options(warn)
+      
       #validattions
       if (is.na(a)){
          errorCondition(recall = ctpMass, message ="a not specified" )
@@ -918,12 +918,12 @@ ebwMass<-function (){
   
   onOK <- function(){
     closeDialog()
-    warn  <- options(warn = -1)
+    
     alpha     <- as.numeric(tclvalue(alphaVar))
     rho     <- as.numeric(tclvalue(rhoVar))
     gamma <- as.numeric(tclvalue(gammaVar))
     er     <- as.numeric(tclvalue(eVar))
-    options(warn)
+    
     #validattions
     if (is.na(alpha)){
       errorCondition(recall = ebwPlot, message ="alpha not specified" )
@@ -1026,11 +1026,11 @@ cbpProbabilities<-function (){
          errorCondition(recall = cbpProbabilities, message = gettextRcmdr("No values specified."))
          return()
       }
-      warn  <- options(warn = -1)
+      
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       tail  <- tclvalue(tailVar)
-      options(warn)
+      options()
       #validattions
       if (is.na(b)){
          errorCondition(recall = cbpProbabilities, message ="b not specified" )
@@ -1102,12 +1102,12 @@ ctpProbabilities<-function (){
          errorCondition(recall = ctpProbabilities, message = gettextRcmdr("No values specified."))
          return()
       }
-      warn  <- options(warn = -1)
+      
       a     <- as.numeric(tclvalue(aVar))
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       tail  <- tclvalue(tailVar)
-      options(warn)
+      
       #validattions
       if (is.na(a)){
          errorCondition(recall = ctpProbabilities, message ="a not specified" )
@@ -1205,12 +1205,12 @@ ebwProbabilities<-function (){
       errorCondition(recall = ctpProbabilities, message = gettextRcmdr("No values specified."))
       return()
     }
-    warn  <- options(warn = -1)
+    
     alpha     <- as.numeric(tclvalue(alphaVar))
     rho     <- as.numeric(tclvalue(rhoVar))
     gamma <- as.numeric(tclvalue(gammaVar))
     tail  <- tclvalue(tailVar)
-    options(warn)
+    
     #validattions
     if (is.na(alpha)){
       errorCondition(recall = ebwPlot, message ="alpha not specified" )
@@ -1297,11 +1297,11 @@ cbpQuantiles<-function (){
           errorCondition(recall = cbpQuantiles, message = gettextRcmdr("No probabilities specified."))
           return()
       }
-      warn  <- options(warn = -1)
+      
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       tail  <- tclvalue(tailVar)
-      options(warn)
+      
       #validattions
       if (is.na(b)){
          errorCondition(recall = cbpQuantiles, message ="b not specified" )
@@ -1373,12 +1373,12 @@ ctpQuantiles<-function (){
          errorCondition(recall = ctpQuantiles, message = gettextRcmdr("No probabilities specified."))
          return()
       }
-      warn  <- options(warn = -1)
+      
       a     <- as.numeric(tclvalue(aVar))
       b     <- as.numeric(tclvalue(bVar))
       gamma <- as.numeric(tclvalue(gammaVar))
       tail  <- tclvalue(tailVar)
-      options(warn)
+      
       #validattions
       if (is.na(a)){
          errorCondition(recall = ctpQuantiles, message ="a not specified" )
@@ -1477,12 +1477,12 @@ ebwQuantiles<-function (){
       errorCondition(recall = ctpQuantiles, message = gettextRcmdr("No probabilities specified."))
       return()
     }
-    warn  <- options(warn = -1)
+    
     alpha     <- as.numeric(tclvalue(alphaVar))
     rho     <- as.numeric(tclvalue(rhoVar))
     gamma <- as.numeric(tclvalue(gammaVar))
     tail  <- tclvalue(tailVar)
-    options(warn)
+    
     #validattions
     if (is.na(alpha)){
       errorCondition(recall = ebwPlot, message ="alpha not specified" )
